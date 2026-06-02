@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Gawad | Project & Data Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0c10; --surface:#111318; --surface2:#181c24;
+    --gold:#f0c040; --gold2:#e0a820; --cyan:#00d4c8;
+    --text:#e8eaf0; --muted:#7a8090; --border:#252a35;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(10,12,16,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .nav-logo{font-family:'Space Mono',monospace;color:var(--gold);font-size:.95rem;letter-spacing:3px}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:600;letter-spacing:1px;transition:color .3s}
+  .nav-links a:hover{color:var(--gold)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:8rem 4rem 4rem;overflow:hidden;gap:4rem}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 50%,rgba(240,192,64,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 30%,rgba(0,212,200,.05) 0%,transparent 60%)}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,192,64,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(240,192,64,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 80%)}
+  .hero-content{position:relative;z-index:1;flex:1;max-width:680px}
+  .hero-photo-wrap{position:relative;z-index:1;flex-shrink:0;animation:fadeUp .8s .5s ease both}
+  .hero-photo-ring{width:260px;height:260px;border-radius:50%;padding:4px;background:conic-gradient(var(--gold),var(--gold2),var(--cyan),var(--gold));animation:spin 8s linear infinite;box-shadow:0 0 60px rgba(240,192,64,.2)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hero-photo-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;border:4px solid var(--bg);animation:spin 8s linear infinite reverse}
+  .hero-photo-inner img{width:100%;height:100%;object-fit:cover;object-position:top center}
+  .hero-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.3);color:var(--gold);padding:.4rem 1rem;border-radius:100px;font-size:.78rem;font-weight:700;letter-spacing:2px;margin-bottom:1.5rem;animation:fadeUp .8s ease both}
+  .badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .hero-name{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;line-height:1.1;margin-bottom:.5rem;animation:fadeUp .8s .1s ease both}
+  .hero-name span{color:var(--gold)}
+  .hero-certs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;animation:fadeUp .8s .15s ease both}
+  .cert-badge{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:1.5px;background:rgba(0,212,200,.08);border:1px solid rgba(0,212,200,.25);color:var(--cyan);padding:.25rem .7rem;border-radius:4px}
+  .hero-title{font-family:'Space Mono',monospace;font-size:clamp(.75rem,1.2vw,.9rem);color:var(--cyan);letter-spacing:2px;margin-bottom:1.2rem;animation:fadeUp .8s .2s ease both}
+  .hero-desc{font-size:1rem;color:var(--muted);line-height:1.9;max-width:600px;margin-bottom:2.5rem;animation:fadeUp .8s .3s ease both}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+  .btn-primary{background:var(--gold);color:#0a0c10;padding:.85rem 2rem;border-radius:6px;font-weight:700;font-size:.9rem;letter-spacing:1px;text-decoration:none;transition:all .3s;display:inline-block}
+  .btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(240,192,64,.25)}
+  .btn-secondary{border:1px solid var(--border);color:var(--text);padding:.85rem 2rem;border-radius:6px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .3s;display:inline-block}
+  .btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+  .btn-whatsapp{background:#25d366;color:#fff;padding:.85rem 2rem;border-radius:6px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+  .btn-whatsapp:hover{background:#1ebe5c;transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,.25)}
+
+  /* STATS */
+  .stats-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 4rem;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap}
+  .stat-item{text-align:center}
+  .stat-number{font-family:'Space Mono',monospace;font-size:2.6rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.3rem}
+  .stat-label{font-size:.82rem;color:var(--muted);letter-spacing:1px;font-weight:600}
+
+  /* SECTIONS */
+  section{padding:5rem 4rem;position:relative}
+  .section-label{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:.8rem}
+  .section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;margin-bottom:.8rem;line-height:1.2}
+  .section-title span{color:var(--gold)}
+  .section-desc{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:550px;margin-bottom:3rem}
+
+  /* SKILLS */
+  #skills{background:var(--surface)}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+  .skill-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1.8rem;position:relative;overflow:hidden;transition:all .4s;cursor:default}
+  .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+  .skill-card:hover{border-color:rgba(240,192,64,.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  .skill-card:hover::before{opacity:1}
+  .skill-icon{font-size:2rem;margin-bottom:.8rem;display:block}
+  .skill-name{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+  .skill-desc{font-size:.83rem;color:var(--muted);line-height:1.7;margin-bottom:1rem}
+  .skill-level{height:3px;background:var(--border);border-radius:10px;overflow:hidden}
+  .skill-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:10px;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+  .skill-pct{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);margin-top:.4rem;text-align:left}
+
+  /* EXPERIENCE */
+  #experience{background:var(--bg)}
+  .timeline{position:relative;padding-right:2rem;max-width:750px}
+  .timeline::before{content:'';position:absolute;top:0;bottom:0;right:0;width:1px;background:linear-gradient(to bottom,var(--gold),transparent)}
+  .timeline-item{position:relative;padding-right:3rem;padding-bottom:2.5rem}
+  .timeline-dot{position:absolute;right:-6px;top:4px;width:13px;height:13px;background:var(--gold);border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 12px rgba(240,192,64,.4)}
+  .timeline-year{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);letter-spacing:2px;margin-bottom:.3rem}
+  .timeline-role{font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+  .timeline-company{font-size:.88rem;color:var(--cyan);margin-bottom:.6rem;font-weight:600}
+  .timeline-text{font-size:.85rem;color:var(--muted);line-height:1.75}
+  .timeline-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
+  .t-tag{font-size:.68rem;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.2);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-family:'Space Mono',monospace}
+
+  /* EDUCATION */
+  #education{background:var(--surface)}
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+  .edu-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1.8rem;transition:all .3s}
+  .edu-card:hover{border-color:rgba(0,212,200,.3);transform:translateY(-3px)}
+  .edu-icon{font-size:2rem;margin-bottom:.8rem}
+  .edu-degree{font-size:.95rem;font-weight:700;margin-bottom:.3rem;color:var(--text)}
+  .edu-place{font-size:.83rem;color:var(--cyan);margin-bottom:.3rem;font-weight:600}
+  .edu-year{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:.5rem}
+  .edu-note{font-size:.8rem;color:var(--muted)}
+
+  /* DASHBOARDS */
+  #dashboards{background:var(--bg)}
+  .dash-showcase{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .dash-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .4s}
+  .dash-card:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,.4);border-color:rgba(240,192,64,.25)}
+  .dash-thumb{height:140px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .dash-thumb-1{background:linear-gradient(135deg,#1a1f2e,#0f1520)}
+  .dash-thumb-2{background:linear-gradient(135deg,#1a2030,#0f1a22)}
+  .dash-thumb-3{background:linear-gradient(135deg,#201a1a,#1a0f10)}
+  .dash-thumb-4{background:linear-gradient(135deg,#1a2818,#0f1a10)}
+  .dash-thumb-5{background:linear-gradient(135deg,#251a30,#180f22)}
+  .dash-info{padding:1.2rem}
+  .dash-tag{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--gold);margin-bottom:.4rem;display:block}
+  .dash-title{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+  .dash-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+  .dash-tools{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.7rem}
+  .tool-tag{font-size:.67rem;background:rgba(0,212,200,.08);border:1px solid rgba(0,212,200,.2);color:var(--cyan);padding:.18rem .55rem;border-radius:4px;font-family:'Space Mono',monospace}
+
+  /* CONTACT */
+  #contact{background:var(--surface);text-align:center}
+  .contact-inner{max-width:600px;margin:0 auto}
+  .contact-cards{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:2rem 0}
+  .contact-card{display:flex;align-items:center;gap:.8rem;background:var(--bg);border:1px solid var(--border);padding:1rem 1.8rem;border-radius:10px;text-decoration:none;color:var(--text);transition:all .3s}
+  .contact-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+  .contact-card.whatsapp:hover{border-color:#25d366}
+  .contact-icon{font-size:1.4rem}
+  .contact-label{font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px;margin-bottom:.2rem}
+  .contact-value{font-size:.88rem;font-weight:700}
+  .contact-card.whatsapp .contact-value{color:#25d366}
+  .contact-card.email .contact-value{color:var(--gold)}
+  .social-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+  .social-btn{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--border);color:var(--muted);padding:.7rem 1.4rem;border-radius:6px;text-decoration:none;font-size:.83rem;font-weight:600;transition:all .3s}
+  .social-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(240,192,64,.05)}
+
+  footer{background:var(--bg);border-top:1px solid var(--border);padding:1.8rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  footer span{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted)}
+  .footer-logo{color:var(--gold)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  @media(max-width:900px){
+    .hero{flex-direction:column-reverse;padding:7rem 1.5rem 4rem;gap:2rem;text-align:center}
+    .hero-photo-ring{width:200px;height:200px}
+    .hero-certs,.hero-cta{justify-content:center}
+    .dash-showcase{grid-template-columns:1fr}
+    nav{padding:1rem 1.5rem}
+    .nav-links{display:none}
+    section{padding:4rem 1.5rem}
+    .stats-strip{padding:2rem 1.5rem;gap:3rem}
+    footer{padding:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MG · PMP®</div>
+  <ul class="nav-links">
+    <li><a href="#skills">المهارات</a></li>
+    <li><a href="#dashboards">Dashboards</a></li>
+    <li><a href="#experience">الخبرة</a></li>
+    <li><a href="#education">التعليم</a></li>
+    <li><a href="#contact">تواصل</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="badge-dot"></div>متاح للفرص · Open to Opportunities</div>
+    <h1 class="hero-name">Mohamed <span>Gawad</span></h1>
+    <div class="hero-certs">
+      <span class="cert-badge">PMP®</span>
+      <span class="cert-badge">PRMG · AUC</span>
+      <span class="cert-badge">Lean Six Sigma Black Belt</span>
+      <span class="cert-badge">Civil Engineer · Ain Shams</span>
+    </div>
+    <p class="hero-title">// PROJECT MANAGEMENT · DATA ANALYTICS · POWER BI · VBA</p>
+    <p class="hero-desc">
+      مهندس مدني وخبير إدارة مشاريع وتحليل بيانات بخبرة <strong style="color:var(--text)">+15 سنة</strong> في قطاع الصناعة الثقيلة والإنشاءات الفولاذية — قاد مشاريع في <strong style="color:var(--text)">AIC Steel</strong> و<strong style="color:var(--text)">El Sewedy Electric</strong> و<strong style="color:var(--text)">Zamil Steel</strong>، وبنى أكثر من <strong style="color:var(--text)">100 Dashboard</strong> تفاعلي حوّلت البيانات الخام إلى قرارات استراتيجية.
+    </p>
+    <div class="hero-cta">
+      <a href="https://wa.me/201007456505" target="_blank" class="btn-whatsapp">💬 WhatsApp</a>
+      <a href="mailto:mohamedabdelgawad27@gmail.com" class="btn-primary">راسلني</a>
+      <a href="#experience" class="btn-secondary">خبرتي</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-ring">
+      <div class="hero-photo-inner">
+        <img id="profileImg" alt="Mohamed Gawad"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item reveal"><div class="stat-number" data-target="15">15+</div><div class="stat-label">سنة خبرة</div></div>
+  <div class="stat-item reveal"><div class="stat-number" data-target="100">100+</div><div class="stat-label">Dashboard</div></div>
+  <div class="stat-item reveal"><div class="stat-number" data-target="3">3</div><div class="stat-label">شركات كبرى</div></div>
+  <div class="stat-item reveal"><div class="stat-number" data-target="150">150K</div><div class="stat-label">طن/سنة مُدارة</div></div>
+  <div class="stat-item reveal"><div class="stat-number" data-target="1000">1000+</div><div class="stat-label">عامل مُتابَع</div></div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// Core Skills</div>
+  <h2 class="section-title">المهارات <span>الأساسية</span></h2>
+  <p class="section-desc">مزيج فريد بين إدارة المشاريع وتحليل البيانات وذكاء الأعمال.</p>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <span class="skill-icon">⚡</span>
+      <div class="skill-name">Power BI Service & Desktop</div>
+      <div class="skill-desc">بناء أكثر من 100 Dashboard تفاعلي لمتابعة المشاريع، الإنتاج، المخزون، والموارد البشرية.</div>
+      <div class="skill-level"><div class="skill-fill" style="width:95%"></div></div>
+      <div class="skill-pct">95%</div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">📊</span>
+      <div class="skill-name">Microsoft Excel & VBA</div>
+      <div class="skill-desc">إتقان احترافي كامل مع برمجة Macros وأتمتة التقارير وتحليل البيانات المعقدة.</div>
+      <div class="skill-level"><div class="skill-fill" style="width:95%"></div></div>
+      <div class="skill-pct">95%</div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🏗️</span>
+      <div class="skill-name">Project Management</div>
+      <div class="skill-desc">إدارة دورة حياة المشروع الكاملة من Kick-off للتسليم — Master Plan، متابعة يومية، وحل المشكلات.</div>
+      <div class="skill-level"><div class="skill-fill" style="width:90%"></div></div>
+      <div class="skill-pct">90%</div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">📅</span>
+      <div class="skill-name">Microsoft Project & Primavera P6</div>
+      <div class="skill-desc">جدولة المشاريع وتحليل التأخير وإعداد تقارير الأداء الزمني للمشاريع الكبرى.</div>
+      <div class="skill-level"><div class="skill-fill" style="width:80%"></div></div>
+      <div class="skill-pct">80%</div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🗄️</span>
+      <div class="skill-name">Microsoft SQL Server</div>
+      <div class="skill-desc">استعلامات البيانات وبناء قواعد البيانات لدعم الـ Dashboards وتقارير الأداء.</div>
+      <div class="skill-level"><div class="skill-fill" style="width:70%"></div></div>
+      <div class="skill-pct">70%</div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🎯</span>
+      <div class="skill-name">Data-Driven Decision Making</div>
+      <div class="skill-desc">تحويل بيانات الإنتاج والمشاريع والموارد إلى قرارات قابلة للتنفيذ على مستوى الإدارة العليا.</div>
+      <div class="skill-level"><div class="skill-fill" style="width:98%"></div></div>
+      <div class="skill-pct">98%</div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARDS -->
+<section id="dashboards">
+  <div class="section-label">// Power BI Work</div>
+  <h2 class="section-title">أبرز الـ <span>Dashboards</span></h2>
+  <p class="section-desc">نماذج حقيقية من مسيرة +15 سنة في قطاع الصلب والصناعة الثقيلة.</p>
+  <div class="dash-showcase">
+
+    <!-- Dashboard 1: Sales Project Dashboard -->
+    <div class="dash-card reveal">
+      <div class="dash-thumb dash-thumb-1" style="padding:0;overflow:hidden;">
+        <img src="https://i.ibb.co/v405C7ZR/Cut-Paste-2026-06-01-23-07-11-826.png" 
+             onerror="this.style.display='none';this.parentElement.innerHTML='<svg width=\'100%\' height=\'140\' viewBox=\'0 0 280 140\'><text x=\'140\' y=\'75\' text-anchor=\'middle\' fill=\'rgba(240,192,64,.4)\' font-size=\'11\' font-family=\'monospace\'>SALES PROJECT DASHBOARD</text></svg>'"
+             style="width:100%;height:140px;object-fit:cover;object-position:top;opacity:.85"/>
+      </div>
+      <div class="dash-info">
+        <span class="dash-tag">SALES · PROJECTS · 393 PROJECTS</span>
+        <div class="dash-title">Sales Project Dashboard</div>
+        <div class="dash-desc">تحليل شامل لـ 393 مشروع — إجمالي 123,963 طن، 235 عميل، أداء مديري المبيعات، توزيع المشاريع جغرافياً على 9 دول، وتطور حجم المبيعات سنوياً.</div>
+        <div class="dash-tools"><span class="tool-tag">Power BI</span><span class="tool-tag">Maps</span><span class="tool-tag">DAX</span><span class="tool-tag">Time Intelligence</span></div>
+      </div>
+    </div>
+
+    <!-- Dashboard 2: Time Series Forecasting -->
+    <div class="dash-card reveal">
+      <div class="dash-thumb dash-thumb-2" style="padding:0;overflow:hidden;">
+        <img src="https://i.ibb.co/v405C7ZR/Cut-Paste-2026-06-01-23-07-11-826.png"
+             onerror="this.style.display='none';this.parentElement.innerHTML='<svg width=\'100%\' height=\'140\' viewBox=\'0 0 280 140\'><polyline points=\'10,110 40,90 60,95 80,70 110,75 140,50 170,55 200,35 240,40\' fill=\'rgba(0,212,200,.1)\' stroke=\'rgba(255,107,53,.8)\' stroke-width=\'2\'/><polyline points=\'10,120 40,100 60,105 80,82 110,87 140,62 170,67 200,47 240,50\' fill=\'none\' stroke=\'rgba(0,212,200,.4)\' stroke-width=\'1\' stroke-dasharray=\'4,2\'/><text x=\'140\' y=\'20\' text-anchor=\'middle\' fill=\'rgba(0,212,200,.7)\' font-size=\'9\' font-family=\'monospace\'>TIME SERIES FORECASTING</text></svg>'"
+             style="width:100%;height:140px;object-fit:cover;object-position:top;opacity:.85"/>
+      </div>
+      <div class="dash-info">
+        <span class="dash-tag">FORECASTING · TIME SERIES · DENEB</span>
+        <div class="dash-title">التنبؤ بحجم المشاريع المستقبلية</div>
+        <div class="dash-desc">نموذج Time Series لتوقع حجم الطن المستقبلي مع Confidence Interval — يُستخدم لتخطيط الخامات والعمالة المطلوبة للأشهر القادمة.</div>
+        <div class="dash-tools"><span class="tool-tag">Python</span><span class="tool-tag">Prophet</span><span class="tool-tag">Power BI</span><span class="tool-tag">Deneb</span></div>
+      </div>
+    </div>
+
+    <!-- Dashboard 3: Decomposition Analysis -->
+    <div class="dash-card reveal">
+      <div class="dash-thumb dash-thumb-3" style="padding:0;overflow:hidden;">
+        <img src="https://i.ibb.co/v405C7ZR/Cut-Paste-2026-06-01-23-07-11-826.png"
+             onerror="this.style.display='none';this.parentElement.innerHTML='<svg width=\'100%\' height=\'140\' viewBox=\'0 0 280 140\'><polyline points=\'10,50 40,40 70,55 100,30 130,45 160,35 200,25 240,30\' fill=\'none\' stroke=\'rgba(0,212,200,.7)\' stroke-width=\'1.5\'/><polyline points=\'10,80 40,75 70,82 100,70 130,78 160,72 200,68 240,72\' fill=\'none\' stroke=\'rgba(240,192,64,.6)\' stroke-width=\'1.5\'/><polyline points=\'10,110 40,105 70,115 100,100 130,112 160,104 200,108 240,103\' fill=\'none\' stroke=\'rgba(255,107,53,.6)\' stroke-width=\'1.5\'/><text x=\'140\' y=\'15\' text-anchor=\'middle\' fill=\'rgba(0,212,200,.6)\' font-size=\'9\' font-family=\'monospace\'>DECOMPOSITION ANALYSIS</text></svg>'"
+             style="width:100%;height:140px;object-fit:cover;object-position:top;opacity:.85"/>
+      </div>
+      <div class="dash-info">
+        <span class="dash-tag">DECOMPOSITION · TREND · SEASONAL</span>
+        <div class="dash-title">تفكيك البيانات — Trend, Seasonal, Residual</div>
+        <div class="dash-desc">تحليل نمطية المبيعات بتفكيك البيانات إلى Trend واتجاه عام + Seasonality موسمية + Residual لتقييم قوة النموذج وفهم سلوك السوق.</div>
+        <div class="dash-tools"><span class="tool-tag">Power BI</span><span class="tool-tag">Python</span><span class="tool-tag">STL Decomp</span><span class="tool-tag">Deneb</span></div>
+      </div>
+    </div>
+
+    <!-- Dashboard 4: Master Project Follow-up -->
+    <div class="dash-card reveal">
+      <div class="dash-thumb dash-thumb-4" style="padding:0;overflow:hidden;">
+        <img src="https://i.ibb.co/v405C7ZR/Cut-Paste-2026-06-01-23-07-11-826.png"
+             onerror="this.style.display='none';this.parentElement.innerHTML='<svg width=\'100%\' height=\'140\' viewBox=\'0 0 280 140\'><rect x=\'10\' y=\'20\' width=\'80\' height=\'30\' rx=\'4\' fill=\'rgba(240,192,64,.15)\' stroke=\'rgba(240,192,64,.3)\' stroke-width=\'1\'/><text x=\'50\' y=\'32\' text-anchor=\'middle\' fill=\'#f0c040\' font-size=\'8\'>11,300 WT</text><text x=\'50\' y=\'44\' text-anchor=\'middle\' fill=\'#7a8090\' font-size=\'7\'>Plan Target</text><rect x=\'100\' y=\'20\' width=\'80\' height=\'30\' rx=\'4\' fill=\'rgba(0,212,200,.1)\' stroke=\'rgba(0,212,200,.25)\' stroke-width=\'1\'/><text x=\'140\' y=\'32\' text-anchor=\'middle\' fill=\'#00d4c8\' font-size=\'7\'>113M SAR</text><text x=\'140\' y=\'44\' text-anchor=\'middle\' fill=\'#7a8090\' font-size=\'7\'>Cash In Plan</text><text x=\'140\' y=\'75\' text-anchor=\'middle\' fill=\'rgba(240,192,64,.5)\' font-size=\'9\' font-family=\'monospace\'>MASTER DASHBOARD</text></svg>'"
+             style="width:100%;height:140px;object-fit:cover;object-position:top;opacity:.85"/>
+      </div>
+      <div class="dash-info">
+        <span class="dash-tag">MASTER DASHBOARD · ALL PROJECTS</span>
+        <div class="dash-title">Master Dashboard — متابعة جميع المشاريع</div>
+        <div class="dash-desc">لوحة شاملة لمتابعة حالة كل مشروع (In Progress / Review / Hold) مع Cash Flow المتوقع، جاهزية الموقع والخامات والمشتريات، أساليب الدفع، وأماكن التصنيع.</div>
+        <div class="dash-tools"><span class="tool-tag">Power BI</span><span class="tool-tag">DAX</span><span class="tool-tag">Oracle</span><span class="tool-tag">Cash Flow</span></div>
+      </div>
+    </div>
+
+    <div class="dash-card reveal" style="border:2px dashed var(--border);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:250px;grid-column:span 2;">
+      <span style="font-size:2.5rem;margin-bottom:.8rem">➕</span>
+      <div style="font-size:.9rem;font-weight:700;color:var(--muted);margin-bottom:.3rem">المزيد من مشاريعك قادم</div>
+      <div style="font-size:.78rem;color:var(--border);text-align:center;padding:0 2rem">أرسل Screenshots أو روابط YouTube لباقي الـ Dashboards</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// Work Experience</div>
+  <h2 class="section-title">مسيرة <span>+15 سنة</span></h2>
+  <p class="section-desc">من مهندس تصميم إلى Project Section Head في كبرى شركات الصلب في المنطقة.</p>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">يونيو 2025 — الحاضر</div>
+      <div class="timeline-role">Project Section Head</div>
+      <div class="timeline-company">AIC Steel — Arabian International Company</div>
+      <div class="timeline-text">قيادة قسم المشاريع بالكامل — ربط الهندسة والمشتريات والمالية والإنتاج. بناء Dashboards شاملة لمتابعة تقدم المشاريع، المخزون، وتكامل مواعيد التصنيع مع ETA المواد.</div>
+      <div class="timeline-tags"><span class="t-tag">Power BI</span><span class="t-tag">Master Plan</span><span class="t-tag">Oracle</span><span class="t-tag">PMP®</span></div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">سبتمبر 2024 — يونيو 2025</div>
+      <div class="timeline-role">Project Manager</div>
+      <div class="timeline-company">El Sewedy Electric</div>
+      <div class="timeline-text">إدارة مشاريع كاملة من RFQ للتسليم — Dashboards لمتابعة التركيب في الموقع وجودة الماكينات، وتحليل المخزون وخطط الشحن. صانع قرار في حالات Crashing وإيقاف المشاريع.</div>
+      <div class="timeline-tags"><span class="t-tag">Power BI</span><span class="t-tag">Dashboard</span><span class="t-tag">Inventory</span><span class="t-tag">Shipping</span></div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">أبريل 2024 — سبتمبر 2024</div>
+      <div class="timeline-role">Planning Section — Material & Production</div>
+      <div class="timeline-company">El Sewedy Electric</div>
+      <div class="timeline-text">بناء هيكل فريق التخطيط من الصفر — خطة المشتريات السنوية مقسمة ربعياً، تطبيق Oracle ERP (BOM & Routing)، وتقارير الإنجاز الشهرية والأسبوعية.</div>
+      <div class="timeline-tags"><span class="t-tag">Oracle ERP</span><span class="t-tag">Procurement</span><span class="t-tag">BOM</span></div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">يونيو 2021 — مارس 2024</div>
+      <div class="timeline-role">Head of Planning & Data Analyst</div>
+      <div class="timeline-company">AIC Steel — Arabian International Company</div>
+      <div class="timeline-text">بناء أكثر من 10 Dashboards احترافية بـ Power BI وExcel: متابعة المشاريع، Sprint Agile، الميزانية، القوى العاملة (+1000 عامل)، الهدف الشهري لشركة تنتج +150,000 طن/سنة.</div>
+      <div class="timeline-tags"><span class="t-tag">Power BI</span><span class="t-tag">Excel</span><span class="t-tag">VBA</span><span class="t-tag">Agile</span><span class="t-tag">150K ton/yr</span></div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">يونيو 2018 — مايو 2021</div>
+      <div class="timeline-role">Planning Team Leader</div>
+      <div class="timeline-company">AIC Steel</div>
+      <div class="timeline-text">جدولة ومتابعة المشاريع المتعددة — تقارير الحمل الوظيفي، مراقبة الأهداف الشهرية والأسبوعية للمرحلة الهندسية، وتقارير تحليل التأخير.</div>
+      <div class="timeline-tags"><span class="t-tag">MS Project</span><span class="t-tag">Primavera</span><span class="t-tag">Delay Analysis</span></div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">يونيو 2016 — مايو 2018</div>
+      <div class="timeline-role">Project Order Management Engineer</div>
+      <div class="timeline-company">Zamil Steel</div>
+      <div class="timeline-text">إدارة عقود المشاريع، التنسيق مع التصنيع والمالية ومراقبة الجودة والشحن، إصدار UMR وتقارير للـ GM.</div>
+      <div class="timeline-tags"><span class="t-tag">Contract Mgt</span><span class="t-tag">CIF</span><span class="t-tag">Quality</span></div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2012 — 2016</div>
+      <div class="timeline-role">Project Coordinator / Senior Design Engineer</div>
+      <div class="timeline-company">AIC Steel</div>
+      <div class="timeline-text">تصميم وصلات الصلب بالكود الأمريكي والبريطاني، متابعة الأنشطة الهندسية، وترقية استثنائية بعد 5 أشهر لكفاءة عالية.</div>
+      <div class="timeline-tags"><span class="t-tag">Steel Design</span><span class="t-tag">AUTOCAD</span><span class="t-tag">RFI</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">// Education & Certifications</div>
+  <h2 class="section-title">التعليم <span>والشهادات</span></h2>
+  <p class="section-desc">خلفية أكاديمية قوية مدعومة بشهادات مهنية دولية.</p>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-icon">🏆</div>
+      <div class="edu-degree">Project Management Professional — PMP®</div>
+      <div class="edu-place">PMI · Credential #4132936</div>
+      <div class="edu-year">فبراير 2025 — يونيو 2025 · Renewal: June 2028</div>
+      <div class="edu-note">أعلى شهادة دولية في إدارة المشاريع</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-degree">Diploma in Project Management — PRMG</div>
+      <div class="edu-place">American University in Cairo (AUC)</div>
+      <div class="edu-year">سبتمبر 2015 — يونيو 2016</div>
+      <div class="edu-note">تقدير ممتاز</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-icon">⚙️</div>
+      <div class="edu-degree">Lean Six Sigma Black Belt</div>
+      <div class="edu-place">TÜV — الهيئة الألمانية للمعايير</div>
+      <div class="edu-year">سبتمبر 2019 — يناير 2020</div>
+      <div class="edu-note">أعلى مستوى في منهجية تحسين الجودة</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-icon">🏛️</div>
+      <div class="edu-degree">بكالوريوس هندسة مدنية</div>
+      <div class="edu-place">جامعة عين شمس</div>
+      <div class="edu-year">سبتمبر 2006 — يونيو 2011</div>
+      <div class="edu-note">تقدير جيد جداً وممتاز في مشروع التخرج</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">// Get In Touch</div>
+    <h2 class="section-title" style="text-align:center">هل لديك <span>مشروع؟</span></h2>
+    <p class="section-desc" style="margin:1rem auto 0;text-align:center">متاح للاستشارات، إدارة المشاريع، وبناء الـ Dashboards الاحترافية.</p>
+    <div class="contact-cards">
+      <a href="mailto:mohamedabdelgawad27@gmail.com" class="contact-card email">
+        <span class="contact-icon">✉️</span>
+        <div><div class="contact-label">EMAIL</div><div class="contact-value">mohamedabdelgawad27@gmail.com</div></div>
+      </a>
+      <a href="https://wa.me/201007456505" target="_blank" class="contact-card whatsapp">
+        <span class="contact-icon">💬</span>
+        <div><div class="contact-label">WHATSAPP</div><div class="contact-value">+20 100 745 6505</div></div>
+      </a>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/mohamed-gawad-pmp%C2%AE-prmg-auc-8625b688/" target="_blank" class="social-btn">💼 LinkedIn</a>
+      <a href="https://github.com/mohamedabdelgawad27-prog" target="_blank" class="social-btn">🐙 GitHub</a>
+      <a href="mailto:mohamedabdelgawad27@gmail.com" class="social-btn">📄 طلب CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">MOHAMED GAWAD · PMP® · PROJECT & DATA EXPERT</span>
+  <span>© 2025 · Zahraa El Maadi, Cairo, Egypt</span>
+</footer>
+
+<script>
+  // Photo
+  (function(){
+    const img = document.getElementById('profileImg');
+    img.onerror = function(){
+      const c=document.createElement('canvas'); c.width=400; c.height=500;
+      const ctx=c.getContext('2d');
+      const g=ctx.createLinearGradient(0,0,400,500);
+      g.addColorStop(0,'#181c24'); g.addColorStop(1,'#0f1218');
+      ctx.fillStyle=g; ctx.fillRect(0,0,400,500);
+      ctx.fillStyle='#f0c040'; ctx.font='bold 100px Arial';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('MG',200,250); img.src=c.toDataURL();
+    };
+    img.src='https://i.ibb.co/v405C7ZR/Cut-Paste-2026-06-01-23-07-11-826.png';
+  })();
+
+  // Reveal
+  const reveals=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('visible'),80*(Array.from(reveals).indexOf(e.target)%4));
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  reveals.forEach(el=>obs.observe(el));
+
+  // Skill bars
+  const sObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const f=e.target.querySelector('.skill-fill');
+        if(f){const w=f.style.width;f.style.width='0%';setTimeout(()=>{f.style.width=w;},200);}
+      }
+    });
+  },{threshold:.3});
+  document.querySelectorAll('.skill-card').forEach(c=>sObs.observe(c));
+</script>
+</body>
+</html>
